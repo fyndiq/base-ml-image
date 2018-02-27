@@ -21,8 +21,8 @@ jobs:
       - run:
           name: Build image
           command: |
-          	source ./scripts/ci-cd/envvars
-          	set -x
+            source ./scripts/ci-cd/envvars
+            set -x
             make build
       - deploy:
           name: publish the image
