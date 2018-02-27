@@ -22,13 +22,15 @@ jobs:
           name: Build image
           command: |
             # fake the CIRCLE_SHA1 in this call to set tag to what we want
-            CIRCLE_SHA1="python3.6.4-librdkafka0.11.3" ./scripts/ci-cd/build.sh
+            source ./tag
+            CIRCLE_SHA1=$TAG ./scripts/ci-cd/build.sh
       - deploy:
           name: publish the image
           branch: master
           command: |
+            source ./tag
             ./scripts/ci-cd/setup-gcloud.sh
-            make push
+            CIRCLE_SHA1=$TAG ./scripts/ci-cd/publish.sh
 workflows:
   version: 2
   build:
