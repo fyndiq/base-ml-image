@@ -21,9 +21,8 @@ jobs:
       - run:
           name: Build image
           command: |
-            source ./scripts/ci-cd/envvars
-            set -x
-            make build
+            # fake the CIRCLE_SHA1 in this call to set tag to what we want
+            CIRCLE_SHA1="python3.6.4-librdkafka0.11.3" ./scripts/ci-cd/build.sh
       - deploy:
           name: publish the image
           branch: master
