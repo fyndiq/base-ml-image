@@ -20,7 +20,10 @@ jobs:
             ./scripts/ci-cd/bootstrap.sh
       - run:
           name: Build image
-          command: make build
+          command: |
+          	source ./scripts/ci-cd/envvars
+          	set -x
+            make build
       - deploy:
           name: publish the image
           branch: master
