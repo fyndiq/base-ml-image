@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Build image
           command: make build
-      - publish:
+      - deploy:
           name: publish the image
           branch: master
           command: |
