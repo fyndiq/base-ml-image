@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    machine:
+      node:
+        version: 7
+      services:
+        - docker
+    steps:
+      - checkout
+      - run:
+          name: Checkout submodules
+          command: |
+            git submodule sync
+            git submodule update --init
+      - run:
+          name: Bootstrap environment
+          command: |
+            echo 'export APP_NAME=$CIRCLE_PROJECT_REPONAME' >> $BASH_ENV
+            ./scripts/ci-cd/bootstrap.sh
+      - run:
+          name: Build image
+          command: make build
+      - publish:
+          name: publish the image
+          branch: master
+          command: |
+            ./scripts/ci-cd/setup-gcloud.sh
+            make push
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          context: org-global
