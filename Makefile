@@ -1,12 +1,16 @@
-REPO=$(IMAGE_URL)
+
+REPO=fyndiq
 NAME=base-ml-image
-TAG=python3.6.4-librdkafka0.11.3
+TAG=python3.7.0-librdkafka0.11.5-sklearn0.19.2
+IMG=$(REPO)/$(NAME):$(TAG)
 
 build:
-	docker build -t $(IMAGE_URL):$(TAG) .
+	docker build -t $(IMG) .
+	docker tag $(IMG) $(REPO)/$(NAME):latest
 
 run:
-	docker run -it --rm $(IMAGE_URL):$(TAG)
+	docker run -it --rm $(IMG)
 
 push: build
-	gcloud docker -- push $(IMAGE_URL):$(TAG) || echo "Image ${IMAGE_URL}:${REPO_SHA1} is already published"
+	docker push $(IMG)
+	docker push $(REPO)/$(NAME):latest

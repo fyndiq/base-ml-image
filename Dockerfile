@@ -1,4 +1,4 @@
-FROM fyndiq/python-alpine-kafka:python3.6.4-librdkafka0.11.3
+FROM fyndiq/python-alpine-kafka:python3.7.0-librdkafka0.11.5
 
 RUN set -x \
     && apk update \

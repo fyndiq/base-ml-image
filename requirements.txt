@@ -1,4 +1,4 @@
-scipy==1.0.0
-scikit-learn[alldeps]==0.19.1
-pandas==0.22.0
-pandas-gbq==0.3.1
+scipy==1.1.0
+scikit-learn[alldeps]==0.19.4
+pandas==0.23.4
+pandas-gbq==0.7.0
